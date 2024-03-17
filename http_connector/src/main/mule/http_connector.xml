@@ -14,4 +14,9 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<logger level="INFO" doc:name="Start_Log" doc:id="949c3a82-2846-4228-9aa1-000bb877735f" message='#["log Start - " ++ flow.name]'/>
 		<set-payload doc:name="Set Payload" doc:id="6d19f267-26a7-4e45-8dd9-5f2eff819a14" value='#[attributes.uriParams.ID]'/>
 	</flow>
+	<flow name="queryParams" doc:id="7b944cdb-ac8a-4439-b8f2-0a64c75c350e" >
+		<http:listener doc:name="Listener" doc:id="2a0a47da-84dd-4eee-adc9-bec489ef107a" config-ref="HTTP_Listener_config" path="/queryParams" allowedMethods="GET"/>
+		<logger level="INFO" doc:name="Start_log" doc:id="d6ae0804-00bd-4aef-b421-94510b3e656e" message='#["log Start - " ++ flow.name]'/>
+		<set-payload value="#[%dw 2.0&#10;&#10;output application/json&#10;---&#10;&#10;attributes.queryParams]" doc:name="Set Payload" doc:id="68a02f5c-878f-4596-a2de-3c93ad506ff8" />
+	</flow>
 </mule>
